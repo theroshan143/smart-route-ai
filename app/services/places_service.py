@@ -73,10 +73,9 @@ class PlacesService:
         """
         if self.settings.is_mock_mode:
             logger.info("MOCK_MODE: returning fixture places for query %r", query)
-            # Simple substring match on mock data
             q_lower = query.lower()
-            results = [p for p in _MOCK_PLACES if q_lower in p["name"].lower()]
-            return results[:limit] if results else _MOCK_PLACES[:1]
+            results = [p for p in _MOCK_PLACES if q_lower in p["name"].lower() or (q_lower == "jfk airport" and "jfk" in p["place_id"])]
+            return results[:limit]
 
         payload: dict[str, Any] = {
             "textQuery": query,
