@@ -32,6 +32,9 @@ async def client() -> AsyncGenerator[AsyncClient, None]:
 
     app = create_app()
 
+    from app.db.engine import create_tables
+    await create_tables()
+
     # Run lifespan (startup/shutdown)
     async with AsyncClient(
         transport=ASGITransport(app=app),
