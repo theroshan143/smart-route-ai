@@ -29,7 +29,7 @@ class Settings(BaseSettings):
         description="Use fixture data instead of real external APIs",
     )
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO"
-    cors_origins: list[str] = Field(
+    cors_origins: str | list[str] = Field(
         default=["http://localhost:5173", "http://localhost:3000"],
     )
 
